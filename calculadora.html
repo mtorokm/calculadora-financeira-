@@ -7,29 +7,59 @@
     <title>Calculadora</title>
 </head>
 <body>
-    <div id="div_inputs" style="float: left; width: 48%; background-image: ;">
+    <div id="div_inputs" style="float: left; width: 48%;">
        <img style="width: 20%;" src="./assets/vinhedo.jpg" alt="foto ilustrativa de um vinhedo">
        <br>
         Digite o seu nome: <br>
         <input id="input_usuario_nome" type="text" placeholder="nome: "> <br>
         Quantos hectares você possui? <br>
-        <input id="input_usuario_Hectar" type="text" placeholder="hectares"> <br>
-        Quanto que é a sua produtividade por hectar? <br>
-        <input id="input_usuario_Pruditividade_Hectar" type="text" placeholder="produtividade por hectar">
+        <input id="input_usuario_hectar" type="number" placeholder="hectares"> <br>
+        <!--
+        Quanto que é a sua produtividade por hectar em procentagem? <br>
+        <input id="input_usuario_Pruditividade_hectar" type="text" placeholder="produtividade por hectar">
         <br>
-        <button>Rodar Análise</button>
+        -->
+        Quantos kilos de uva você produz? <br>
+        <input id="input_usuario_kilo_uva" type="number"> <br>
+        <button onclick="analisar()">Rodar Análise</button>
     </div>
     <div id="div_resultados" style="float: left; width: 48%;">
-       <b>Resutados:</b>
+
+        <br>
+        <b>Resutados:</b>
         Olá, seu josé! <br>
         Com o nosso sistema voce terá um aumento de A% em sua produtividade;
         <br>
         <br>
         Sua perda de D% vai ser reduzida para E% <br>
         Evitando um desperdício de Y kg de uvas <br>
-        e representando uma economia de X% em reais, tendo como base o preço <br> 
+        e representando uma economia de X reais, tendo como base o preço <br> 
         do kg da uva no brasil.
-
+        <br>
+        <br>
+        <img style="width: 30%; margin-left: 20%;" src="./assets/economia.jpg" alt="foto ilustrativa de economia">
 </body>
 </html>
-<script></script>
+<script>
+    function analisar() {
+        //inicio - variaveis inputs
+        var nomeUsuario = input_usuario_nome.value;
+        var hecatarUsuario = input_usuario_hectar.value;
+     // var produtividadeHectar = input_usuario_Pruditividade_hectar.value;
+        var kilosUvaUsuario = input_usuario_kilo_uva.value;
+        //fim variaveis inputs
+    
+        //inicio variaveis outputs
+        var aumentoProdutividade = 1;
+        var perdaPorcentagem = 2;
+        var reducaoPerda = 3;
+        var desperdicioEvitado = 4;
+        var economiaReais = 5;
+
+        //fim variaveis outputs 
+
+
+
+        
+    }
+</script>
