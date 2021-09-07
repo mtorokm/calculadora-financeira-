@@ -6,10 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
 </head>
-<body>
+
+<body style="background-color: rgb(182, 18, 182); margin: 0px">
+    <div style="background-color: #440344; margin-bottom: 50px;">
+        <span style="color:whitesmoke; margin-left: 5%;">Logo</span>
+        <span style="color:whitesmoke; margin-left: 25%;">Home</span>
+        <span style="color:whitesmoke; margin-left: 10%;">Sobre nós</span>
+        <span style="color:whitesmoke; margin-left: 35%;">Login</span>
+        <span style="color:whitesmoke; margin-left: 5%;">Cadastro</span>
+    </div>
+    
     <div id="div_inputs" style="float: left; width: 48%;">
-       <img style="width: 20%;" src="./assets/vinhedo.jpg" alt="foto ilustrativa de um vinhedo">
-       <br>
+        <div style="margin-left: 20%;">
+        <img style="width: 20%; border-radius: 50%;" src="./assets/vinhedo.jpg" alt="foto ilustrativa de um vinhedo">
+        <br>
         Digite o seu nome: <br>
         <input id="input_usuario_nome" type="text" placeholder="nome: "> <br>
         Quantos hectares você possui? <br>
@@ -19,47 +29,64 @@
         <input id="input_usuario_Pruditividade_hectar" type="text" placeholder="produtividade por hectar">
         <br>
         -->
-        Quantos kilos de uva você produz? <br>
-        <input id="input_usuario_kilo_uva" type="number"> <br>
+        Quantas toneladas de uva você produz?(1 tonelada = 1000kg) <br>
+        <input id="input_usuario_toneladas_uva" type="number" placeholder="quantidade de uva produzida"> <br>
         <button onclick="analisar()">Rodar Análise</button>
+      </div>
     </div>
     <div id="div_resultados" style="float: left; width: 48%;">
-
-        <br>
-        <b>Resutados:</b>
-        Olá, seu josé! <br>
-        Com o nosso sistema voce terá um aumento de A% em sua produtividade;
-        <br>
-        <br>
-        Sua perda de D% vai ser reduzida para E% <br>
-        Evitando um desperdício de Y kg de uvas <br>
-        e representando uma economia de X reais, tendo como base o preço <br> 
-        do kg da uva no brasil.
-        <br>
-        <br>
-        <img style="width: 30%; margin-left: 20%;" src="./assets/economia.jpg" alt="foto ilustrativa de economia">
+        
+        
+        <div id="div_calculos"></div>
+        <img style="width: 30%; margin-left: 20%; border-radius: 50%;" src="./assets/economia.jpg" alt="foto ilustrativa de economia">
+    </div>
+    
 </body>
 </html>
 <script>
     function analisar() {
         //inicio - variaveis inputs
         var nomeUsuario = input_usuario_nome.value;
-        var hecatarUsuario = input_usuario_hectar.value;
-     // var produtividadeHectar = input_usuario_Pruditividade_hectar.value;
-        var kilosUvaUsuario = input_usuario_kilo_uva.value;
+        var hectarUsuario = input_usuario_hectar.value;
+        var toneladasUvaUsuario = input_usuario_toneladas_uva.value;
         //fim variaveis inputs
-    
-        //inicio variaveis outputs
-        var aumentoProdutividade = 1;
-        var perdaPorcentagem = 2;
-        var reducaoPerda = 3;
-        var desperdicioEvitado = 4;
-        var economiaReais = 5;
+        
+        //outras variaveis
+        
+        
+        var produtividadeUvaNormal= 30; //em tonelada de uvas por hectar no caso 30 toneladas de uvas nesse hectar.
+        
+        var produtividadeUsuario =  ((toneladasUvaUsuario*100)/(produtividadeUvaNormal*hectarUsuario)).toFixed(2); //produtividade do usuario em porcentagem
+        var precoUva2021 = 1.10; // preco da uva em reais
+     
+        //fim outras variaveis
 
+        //inicio variaveis outputs
+
+        var perdaPorcentagem = 100 - produtividadeUsuario ;// 100% - x%
+        var reducaoPerda =  2; //garantimos que o usuario ira conseguirá alcançar 98% de produtividade com o nosso produto resultando em uma perda de 2%
+        var desperdicioAntes = ((produtividadeUvaNormal*perdaPorcentagem)/100);
+        var desperdicioAgora = (produtividadeUvaNormal*reducaoPerda/100);
+        //var economiaReais = desperdicioEvitado*precoUva2021; //1kg = 1.10 reais   1t-1000kg - 1100reais(preço, fixado em 22 de outubro pelo Conselho Monetário Nacional (CMN))
+        var desperdicioEvitado = desperdicioAntes - desperdicioAgora;
+        var economiaReais = (desperdicioAntes - desperdicioAgora)*precoUva2021*100;
         //fim variaveis outputs 
 
+        //inserindo html na div resultados
+        div_calculos.innerHTML= `
+        <br>
+        <b>Resutados:</b>
+        Olá, seu ${nomeUsuario}! <br>
+        Atuamente você aprensenta uma perda de ${perdaPorcentagem.toFixed(2)}% comparado com a produtividade normal de uva por hecatar,
+        adotando o nossa sistema garantimos que essa perda passará para apenas ${reducaoPerda.toFixed(2)}%;
+        <br>
+        Evitando um desperdício de  ${desperdicioEvitado.toFixed(2)}t de uvas <br>
+        e resultando em um aumento de ${economiaReais.toFixed(2)} reais na sua receita, tendo como base o preço <br> 
+        do kg da uva no brasil. (preço fixado em 22 de outubro pelo Conselho Monetário Nacional (CMN))
+        <br>
+        <br>
+        <br>
+        `
 
-
-        
-    }
+}
 </script>
